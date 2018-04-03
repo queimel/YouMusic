@@ -4,7 +4,7 @@
   "description": "Simple youtube based player",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack --watch --config webpack.config.js",
+    "start": "webpack --watch --config webpack.config.js  --mode development",
     "build": "webpack --mode development ",
     "test": "test"
   },

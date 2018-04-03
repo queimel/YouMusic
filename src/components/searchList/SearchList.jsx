@@ -1,38 +1,29 @@
 import React, { Component } from 'react';
 
 class SearchList extends Component {
+
+
     render() {
+        let items = this.props.results;
         return (
             <div>
                 <ul>
+                {items.map(item => 
                     <li>
-                        <div class='info'>
-                            <div class='img'>
-                                <img src='https://picsum.photos/300/250' />
+                        <div className='info'>
+                            <div className='img'>
+                                <img src={item.snippet.thumbnails.medium.url}i />
                             </div>
-                            <div class='txt'>
-                                <p>Nombre del artista</p>
-                                <span>Titulo de la canción</span>
+                            <div className='txt'>
+                                <p>{item.snippet.title}</p>
+                                <span>{item.snippet.channelTitle}</span>
                             </div>
                         </div>
-                        <div class='action'>
-                            <i class='fas fa-ellipsis-v fa-lg'></i>
+                        <div className='action'>
+                            <i className='fas fa-ellipsis-v fa-lg'></i>
                         </div>
                     </li>
-                    <li>
-                        <div class='info'>
-                            <div class='img'>
-                                <img src='https://picsum.photos/300/250' />
-                            </div>
-                            <div class='txt'>
-                                <p>Nombre del artista</p>
-                                <span>Titulo de la canción</span>
-                            </div>
-                        </div>
-                        <div class='action'>
-                            <i class='fas fa-ellipsis-v fa-lg'></i>
-                        </div>
-                    </li>
+                )}
                 </ul>
             </div>
         );
