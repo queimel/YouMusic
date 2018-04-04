@@ -1,6 +1,5 @@
 const path = require('path');
 var HTMLWebpackPlugin = require("html-webpack-plugin");
-var LiveReloadPlugin = require('webpack-livereload-plugin');
 
 module.exports = {
   resolve: {
@@ -15,8 +14,7 @@ module.exports = {
   plugins: [
     new HTMLWebpackPlugin({
       template: path.resolve("src/index.html")
-    }),
-    new LiveReloadPlugin({})
+    })
   ],
   module: {
     rules: [
