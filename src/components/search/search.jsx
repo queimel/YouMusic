@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import FontAwesome, { FontawesomeObject } from '@fortawesome/fontawesome';
+import { faSyncAlt } from '@fortawesome/fontawesome-free-solid';
 
 class Search extends Component {
 

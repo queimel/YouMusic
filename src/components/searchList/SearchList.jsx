@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import FontAwesome, { FontawesomeObject } from '@fortawesome/fontawesome';
+import { faEllipsisV } from '@fortawesome/fontawesome-free-solid';
+
 
 class SearchList extends Component {
 
@@ -21,6 +24,7 @@ class SearchList extends Component {
                         </div>
                         <div className='action'>
                             <i className='fas fa-ellipsis-v fa-lg'></i>
+                            
                         </div>
                     </li>
                 )}
