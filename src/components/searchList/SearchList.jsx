@@ -8,11 +8,11 @@ class SearchList extends Component {
         return (
             <div>
                 <ul>
-                {items.map(item => 
-                    <li>
+                {items.map((item, index) => 
+                    <li key={index}>
                         <div className='info'>
                             <div className='img'>
-                                <img src={item.snippet.thumbnails.medium.url}i />
+                                <img src={item.snippet.thumbnails.medium.url} />
                             </div>
                             <div className='txt'>
                                 <p>{item.snippet.title}</p>

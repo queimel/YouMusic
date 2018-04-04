@@ -4,8 +4,8 @@
   "description": "Simple youtube based player",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack --watch --config webpack.config.js  --mode development",
-    "build": "webpack --mode development ",
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack --mode production",
     "test": "test"
   },
   "repository": {
@@ -20,7 +20,6 @@
   "homepage": "https://github.com/queimel/YouMusic#readme",
   "dependencies": {
     "html-webpack-plugin": "^3.1.0",
-    "livereload-js": "^2.3.0",
     "lodash": "^4.17.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
@@ -40,6 +39,6 @@
     "style-loader": "^0.20.3",
     "webpack": "^4.2.0",
     "webpack-cli": "^2.0.13",
-    "webpack-livereload-plugin": "^2.1.1"
+    "webpack-dev-server": "^3.1.1"
   }
 }
