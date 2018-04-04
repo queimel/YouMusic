@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Search from '../search/search'
 import SearchList from '../searchList/SearchList'
+import AudioPlayer from '../audioplayer/AudioPlayer'
 
 class App extends Component {
 
@@ -28,12 +29,8 @@ class App extends Component {
                 return response.json()
             })
             .then((videos) => {
-
-
                 this.setState({ videoItems: videos.items })
             })
-
-            
     }
     
     render() {
@@ -44,6 +41,7 @@ class App extends Component {
                 </header>
                 <section id="results">
                     <SearchList results = {this.state.videoItems}/>
+                    <AudioPlayer />
                 </section>
             </div>
         );

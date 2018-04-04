@@ -12,7 +12,7 @@ class SearchList extends Component {
             <div>
                 <ul>
                 {items.map((item, index) => 
-                    <li key={index}>
+                    <li key={index} onClick="">
                         <div className='info'>
                             <div className='img'>
                                 <img src={item.snippet.thumbnails.medium.url} />
