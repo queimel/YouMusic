@@ -10,7 +10,8 @@ class App extends Component {
 
         this.state = {
             videoItems : [],
-            keywords: ''
+            keywords: '',
+            videoSelected: ''
         }
 
 
@@ -32,6 +33,10 @@ class App extends Component {
                 this.setState({ videoItems: videos.items })
             })
     }
+
+    setVideoSelected(videoId){
+        this.setState({videoSelected: videoId});
+    }
     
     render() {
         return (
@@ -40,8 +45,8 @@ class App extends Component {
                     <Search onSearch ={ this.handleApiQuery.bind(this)}/>
                 </header>
                 <section id="results">
-                    <SearchList results = {this.state.videoItems}/>
-                    <AudioPlayer />
+                    <SearchList results = {this.state.videoItems} onClickedVideo={this.setVideoSelected.bind(this)}/>
+                    <AudioPlayer videoId = {this.state.videoSelected} />
                 </section>
             </div>
         );

@@ -5,6 +5,16 @@ import { faEllipsisV } from '@fortawesome/fontawesome-free-solid';
 
 class SearchList extends Component {
 
+    constructor(props) {
+        super(props);
+        
+    }
+        
+    handleItemClick(e){
+        e.stopPropagation();
+        let videoId = e.currentTarget.getAttribute('data-id');
+        this.props.onClickedVideo(videoId);
+    }
 
     render() {
         let items = this.props.results;
@@ -12,7 +22,7 @@ class SearchList extends Component {
             <div>
                 <ul>
                 {items.map((item, index) => 
-                    <li key={index} onClick="">
+                    <li key={index} onClickCapture={this.handleItemClick.bind(this)} data-id={item.id.videoId}>
                         <div className='info'>
                             <div className='img'>
                                 <img src={item.snippet.thumbnails.medium.url} />

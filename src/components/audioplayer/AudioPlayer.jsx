@@ -1,70 +1,50 @@
 import React, { Component } from 'react';
 
+import YTPlayer from 'yt-player';
+
 class AudioPlayer extends Component {
 
     constructor(props) {
         super(props);
-        this.Player = React.createRef();
+
+        this.playerRef = React.createRef();
+        this.onYouTubeReady = this.onYouTubeReady.bind(this);
+
+        this.state = {
+            videoToPlay: this.props.videoId
+        }
+
     }
     
-    parse_str(str) {
-        return str.split('&').reduce(function(params, param) {
-          var paramSplit = param.split('=').map(function(value) {
-            return decodeURIComponent(value.replace('+', ' '));
-          });
-          params[paramSplit[0]] = paramSplit[1];
-          return params;
-        }, {});
+
+    onYouTubeReady(videoId) {
+
+        const idPlayer = '#'+this.playerRef.current.id;
+
+        const player = new YTPlayer(idPlayer);
+
+        player.load(videoId)
+        player.setVolume(100)
+
+        player.play()
+
+        player.on('playing', () => {
+            console.log(player.getDuration()) // => duracion en segundos
+        })
+
     }
 
     componentDidMount(){
-        const vid = "3r_Z5AYJJd4", audio_streams = {};
-        fetch ('https://www.youtube.com/get_video_info?video_id=' + vid, {
-            headers : { 
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Accept': 'application/x-www-form-urlencoded'
-             }
-      
-        })
-        .then( (response) => { return response.text() } )
-        .then( (data) => { 
-            let datos = this.parse_str(data)
-            let streams = (datos.url_encoded_fmt_stream_map + ',' + datos.adaptive_fmts).split(',');
+        const id = this.state.videoToPlay
 
-            streams.map((n, s) => {
-                let stream = this.parse_str(n),
-                  itag = stream.itag * 1,
-                  quality = false;
-                switch (itag) {
-                  case 139:
-                    quality = "48kbps";
-                    break;
-                  case 140:
-                    quality = "128kbps";
-                    break;
-                  case 141:
-                    quality = "256kbps";
-                    break;
-                }
-
-                if (quality) audio_streams[quality] = stream.url;
-
-                
-            })
-
-            this.Player.current.src = audio_streams['128kbps'];
-        }) // then   
-        
-        
-
-    }// component DId Mount
-
+        console.log(id);
+        /*const video = 'uetFO7y8WPA';
+        this.onYouTubeReady(video);*/
+    }
 
     render() {
         return (
-            <div>
-                <audio controls="controls" id="audio" ref={this.Player} src=""> </audio>
-            </div>
+            <div id="player" ref={this.playerRef}></div>
         );
     }
 }
