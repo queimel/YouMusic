@@ -11,7 +11,8 @@ class AudioPlayer extends Component {
         this.onYouTubeReady = this.onYouTubeReady.bind(this);
 
         this.state = {
-            videoToPlay: this.props.videoId
+            playerState: false,
+
         }
 
     }
@@ -34,12 +35,16 @@ class AudioPlayer extends Component {
 
     }
 
-    componentDidMount(){
-        const id = this.state.videoToPlay
-
+    cargaide(id){
         console.log(id);
-        /*const video = 'uetFO7y8WPA';
-        this.onYouTubeReady(video);*/
+    }
+
+    componentDidMount() {
+        this.props.onRef(this)
+    }
+
+    componentWillUnmount() {
+        this.props.onRef(undefined)
     }
 
     render() {

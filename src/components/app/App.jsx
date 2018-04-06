@@ -7,11 +7,11 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             videoItems : [],
             keywords: '',
-            videoSelected: ''
+            videoSelected: '',
+            playerState: false
         }
 
 
@@ -36,6 +36,9 @@ class App extends Component {
 
     setVideoSelected(videoId){
         this.setState({videoSelected: videoId});
+        this.setState({playerState:true})
+
+        this.child.onYouTubeReady(videoId);
     }
     
     render() {
@@ -46,7 +49,8 @@ class App extends Component {
                 </header>
                 <section id="results">
                     <SearchList results = {this.state.videoItems} onClickedVideo={this.setVideoSelected.bind(this)}/>
-                    <AudioPlayer videoId = {this.state.videoSelected} />
+                    
+                    <AudioPlayer videoId = {this.state.videoSelected} playerState={this.state.playerState} onRef={ref => (this.child = ref)}/>
                 </section>
             </div>
         );
