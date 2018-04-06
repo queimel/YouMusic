@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Search from '../search/search'
 import SearchList from '../searchList/SearchList'
+import AudioPlayer from '../audioplayer/AudioPlayer'
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             videoItems : [],
-            keywords: ''
+            keywords: '',
+            videoSelected: '',
+            playerState: false
         }
 
 
@@ -28,12 +30,15 @@ class App extends Component {
                 return response.json()
             })
             .then((videos) => {
-
-
                 this.setState({ videoItems: videos.items })
             })
+    }
 
-            
+    setVideoSelected(videoId){
+        this.setState({videoSelected: videoId});
+        this.setState({playerState:true})
+
+        this.child.onYouTubeReady(videoId);
     }
     
     render() {
@@ -43,7 +48,9 @@ class App extends Component {
                     <Search onSearch ={ this.handleApiQuery.bind(this)}/>
                 </header>
                 <section id="results">
-                    <SearchList results = {this.state.videoItems}/>
+                    <SearchList results = {this.state.videoItems} onClickedVideo={this.setVideoSelected.bind(this)}/>
+                    
+                    <AudioPlayer videoId = {this.state.videoSelected} playerState={this.state.playerState} onRef={ref => (this.child = ref)}/>
                 </section>
             </div>
         );
