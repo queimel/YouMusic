@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Search from '../search/search'
 import SearchList from '../searchList/SearchList'
 import AudioPlayer from '../audioplayer/AudioPlayer'
+import MiniPlayer from '../MiniPlayer/MiniPlayer'
 
 class Home extends Component {
     constructor(props) {
@@ -32,7 +33,9 @@ class Home extends Component {
     }
 
     setVideoSelected(videoId){
-        this.props.songControl(videoId);
+     
+        let song = this.state.videoItems[videoId]
+        this.props.songInfo(song)
     }
     
     render() {
@@ -43,6 +46,7 @@ class Home extends Component {
                 </header>
                 <section id="results">
                     <SearchList results = {this.state.videoItems} onClickedVideo={this.setVideoSelected.bind(this)}/>
+                    <MiniPlayer />
                 </section>
             </div>
         );

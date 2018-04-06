@@ -22,7 +22,7 @@ class SearchList extends Component {
             <div>
                 <ul>
                 {items.map((item, index) => 
-                    <li key={index} onClickCapture={this.handleItemClick.bind(this)} data-id={item.id.videoId}>
+                    <li key={index} onClickCapture={this.handleItemClick.bind(this)} data-id={index}>
                         <div className='info'>
                             <div className='img'>
                                 <img src={item.snippet.thumbnails.medium.url} />

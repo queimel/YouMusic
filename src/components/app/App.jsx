@@ -6,17 +6,27 @@ class App extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            selectedSongTitle: ''
+        }
     }
 
-    playerControl(songId){
+    playerControl(songInfo){
+
+        let songId = songInfo.id.videoId;
+        let songTitle = songInfo.snippet.title;
+
         this.player.onYouTubeReady(songId);
+
+        this.setState({selectedSongTitle: songTitle})
     }
 
     render() {
         return (
             <div>
-                <Home songControl={this.playerControl.bind(this)}/>
-                <AudioPlayer onRef={ref => (this.player = ref)}/>
+                <Home songInfo={this.playerControl.bind(this)} title={this.state.selectedSongTitle}/>
+                <AudioPlayer onRef={ref => (this.player = ref)} />
             </div>
         );
     }
