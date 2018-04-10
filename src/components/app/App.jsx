@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Home from '../Home/Home';
 import AudioPlayer from '../audioplayer/AudioPlayer'
-
+import MiniPlayer from '../MiniPlayer/MiniPlayer'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class App extends Component {
 
@@ -9,30 +10,59 @@ class App extends Component {
         super(props);
 
         this.state = {
-            selectedSongTitle: '',
-            PlayingSong: false       
+            PlayingSong: false,
+            songTitle: '',
+            songImg: ''
         }
     }
 
-    playerControl(songInfo){
+    
 
-        let songId = songInfo.id.videoId;
-        let songTitle = songInfo.snippet.title;
+    playerLoad(songInfo){
 
+        let song = songInfo
+        let songId = song.id.videoId;
         this.player.onYouTubeReady(songId);
+        this.setState(
+            { 
+                PlayingSong: true,
+                songTitle: song.snippet.title,
+                songImg: song.snippet.thumbnails.high.url
+            }
+        )
 
-        this.setState({selectedSongTitle: songTitle, PlayingSong: true})
+    }
+
+    playerPlay(){
+        this.player.playerPlay();
+        this.setState({PlayingSong: true})
+    }
+
+    playerPause(){
+        this.player.playerPause();
+        // this.setState({PlayingSong: false})
     }
 
     render() {
         return (
             <div>
                 <Home 
-                    songInfo={this.playerControl.bind(this)} 
-                    title={this.state.selectedSongTitle} 
-                    showMiniPlayer={this.state.PlayingSong}
+                    songInfo={this.playerLoad.bind(this)}
                 />
-                
+                <ReactCSSTransitionGroup
+                    transitionName="mp"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}>
+                    
+                    {this.state.PlayingSong
+                        ? <MiniPlayer 
+                            title={this.state.songTitle} 
+                            image={ this.state.songImg} 
+                            playerState={this.state.PlayingSong}
+                            onClickPause={this.playerPause.bind(this)}
+                            /> 
+                        : '' }  
+                </ReactCSSTransitionGroup>                     
                 <AudioPlayer onRef={ref => (this.player = ref)} />
             </div>
         );

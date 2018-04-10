@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Search from '../search/search'
 import SearchList from '../searchList/SearchList'
-import MiniPlayer from '../MiniPlayer/MiniPlayer'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 class Home extends Component {
@@ -14,6 +12,9 @@ class Home extends Component {
         }
 
 
+    }
+    componentDidMount(){
+        this.setState({playerState: this.props.showMiniPlayer})
     }
 
     handleApiQuery(e) {
@@ -37,6 +38,7 @@ class Home extends Component {
      
         let song = this.state.videoItems[videoId]
         this.props.songInfo(song)
+        
     }
     
     render() {
@@ -48,15 +50,6 @@ class Home extends Component {
                 <section id="results">
                     <SearchList results = {this.state.videoItems} onClickedVideo={this.setVideoSelected.bind(this)}/>
                 </section>
-                <ReactCSSTransitionGroup
-                    transitionName="mp"
-                    transitionEnterTimeout={500}
-                    transitionLeaveTimeout={300}>
-                    {this.props.showMiniPlayer 
-                        ? <MiniPlayer /> 
-                        : '' }  
-                </ReactCSSTransitionGroup>     
-
             </div>
         );
     }

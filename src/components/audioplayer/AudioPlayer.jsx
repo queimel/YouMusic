@@ -36,15 +36,17 @@ class AudioPlayer extends Component {
     onYouTubeReady(videoId) {
 
         let player = this.state.player;
+        player.load(videoId)  
+        this.playerPlay();
+    }
 
-        player.load(videoId)
-        player.setVolume(100)
-
-        player.play()
-
-        /*player.on('playing', () => {
-            console.log(player.getDuration()) // => duracion en segundos
-        })*/
+    playerPlay(){
+        let player = this.state.player;
+        player.play();        
+    }
+    playerPause(){
+        let player = this.state.player;
+        player.pause();
     }
 
     render() {
