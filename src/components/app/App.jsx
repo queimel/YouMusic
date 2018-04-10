@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Home from '../Home/Home';
-import AudioPlayer from '../audioplayer/AudioPlayer';
+import AudioPlayer from '../audioplayer/AudioPlayer'
+
 
 class App extends Component {
 
@@ -8,7 +9,8 @@ class App extends Component {
         super(props);
 
         this.state = {
-            selectedSongTitle: ''
+            selectedSongTitle: '',
+            PlayingSong: false       
         }
     }
 
@@ -19,13 +21,18 @@ class App extends Component {
 
         this.player.onYouTubeReady(songId);
 
-        this.setState({selectedSongTitle: songTitle})
+        this.setState({selectedSongTitle: songTitle, PlayingSong: true})
     }
 
     render() {
         return (
             <div>
-                <Home songInfo={this.playerControl.bind(this)} title={this.state.selectedSongTitle}/>
+                <Home 
+                    songInfo={this.playerControl.bind(this)} 
+                    title={this.state.selectedSongTitle} 
+                    showMiniPlayer={this.state.PlayingSong}
+                />
+                
                 <AudioPlayer onRef={ref => (this.player = ref)} />
             </div>
         );

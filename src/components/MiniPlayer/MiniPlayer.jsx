@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import FontAwesome, { FontawesomeObject } from '@fortawesome/fontawesome';
 import { faHeadphones, faPlay } from '@fortawesome/fontawesome-free-solid';
+import '../../scss/variables.scss'
+import './MiniPlayer.scss'
+
 
 class MiniPlayer extends Component {
     render() {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import YTPlayer from 'yt-player';
+import './AudioPlayer.scss'
 
 class AudioPlayer extends Component {
 
