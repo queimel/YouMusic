@@ -11,40 +11,39 @@ class AudioPlayer extends Component {
         this.onYouTubeReady = this.onYouTubeReady.bind(this);
 
         this.state = {
-            playerState: false,
+            player: {},
 
         }
 
     }
     
+    componentDidMount() {
+        this.props.onRef(this)
+
+        const idPlayer = '#'+this.playerRef.current.id;
+        const player = new YTPlayer(idPlayer);
+
+        this.setState({player})
+    }
+
+    componentWillUnmount() {
+        this.props.onRef(undefined)
+        let player = this.state.player;
+        player.destroy();
+    }
 
     onYouTubeReady(videoId) {
 
-        const idPlayer = '#'+this.playerRef.current.id;
-
-        const player = new YTPlayer(idPlayer);
+        let player = this.state.player;
 
         player.load(videoId)
         player.setVolume(100)
 
         player.play()
 
-        player.on('playing', () => {
+        /*player.on('playing', () => {
             console.log(player.getDuration()) // => duracion en segundos
-        })
-
-    }
-
-    cargaide(id){
-        console.log(id);
-    }
-
-    componentDidMount() {
-        this.props.onRef(this)
-    }
-
-    componentWillUnmount() {
-        this.props.onRef(undefined)
+        })*/
     }
 
     render() {

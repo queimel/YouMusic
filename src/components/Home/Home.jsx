@@ -19,7 +19,7 @@ class Home extends Component {
         let terms = e.target.value;
         const ApiKey = 'AIzaSyAUd28jjI7Xv_jB4wypxv-BiUPd6GHBeiA'
 
-        let endpoint = `https://www.googleapis.com/youtube/v3/search?key=${ApiKey}&q=${terms}&part=snippet,id&order=date&maxResults=10`
+        let endpoint = `https://www.googleapis.com/youtube/v3/search?key=${ApiKey}&q=${terms}&part=snippet,id&order=viewCount&maxResults=10`
 
         // https://www.googleapis.com/youtube/v3/search?key=AIzaSyAUd28jjI7Xv_jB4wypxv-BiUPd6GHBeiA&q="dogs and cats"&part=snippet,id&order=date&maxResults=10
         
