@@ -22,6 +22,7 @@ class MiniPlayer extends Component {
 
     handlePlayClick(e){
         e.stopPropagation();
+        this.props.onClickPlay();
         this.setState({paused: false})
     }
 
@@ -38,12 +39,15 @@ class MiniPlayer extends Component {
                     </div>      
                 </div>
                 <div className="actions">
-                    
-                        {this.state.paused
-                            ? <button><i className="fas fa-play-circle fa-2x"></i></button>
-                            : <button onClickCapture={this.handlePauseClick.bind(this)}> <i className="fas fa-pause-circle fa-2x"></i> </button>
+                
+                        {this.state.paused === false
+                            ? <button onClickCapture={this.handlePauseClick.bind(this)}> <i className="fas fa-pause-circle fa-2x"></i> </button>
+                            : null
                         }
-                        
+                        {this.state.paused === true
+                            ? <button onClickCapture={this.handlePlayClick.bind(this)}><i className="fas fa-play-circle fa-2x"></i></button>
+                            : null
+                        }                        
                       
                 </div>
             </div>

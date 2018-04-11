@@ -13,17 +13,13 @@ class AudioPlayer extends Component {
 
         this.state = {
             player: {},
-
         }
-
     }
     
     componentDidMount() {
         this.props.onRef(this)
-
         const idPlayer = '#'+this.playerRef.current.id;
         const player = new YTPlayer(idPlayer);
-
         this.setState({player})
     }
 
@@ -34,7 +30,6 @@ class AudioPlayer extends Component {
     }
 
     onYouTubeReady(videoId) {
-
         let player = this.state.player;
         player.load(videoId)  
         this.playerPlay();

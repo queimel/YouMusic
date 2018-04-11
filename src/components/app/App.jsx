@@ -60,6 +60,7 @@ class App extends Component {
                             image={ this.state.songImg} 
                             playerState={this.state.PlayingSong}
                             onClickPause={this.playerPause.bind(this)}
+                            onClickPlay={this.playerPlay.bind(this)}
                             /> 
                         : '' }  
                 </ReactCSSTransitionGroup>                     
