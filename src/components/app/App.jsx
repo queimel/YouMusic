@@ -1,57 +1,70 @@
 import React, { Component } from 'react';
-import Search from '../search/search'
-import SearchList from '../searchList/SearchList'
+import Home from '../Home/Home';
 import AudioPlayer from '../audioplayer/AudioPlayer'
+import MiniPlayer from '../MiniPlayer/MiniPlayer'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class App extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            videoItems : [],
-            keywords: '',
-            videoSelected: '',
-            playerState: false
+            PlayingSong: false,
+            songTitle: '',
+            songImg: ''
         }
-
-
     }
 
-    handleApiQuery(e) {
-        let terms = e.target.value;
-        const ApiKey = 'AIzaSyAUd28jjI7Xv_jB4wypxv-BiUPd6GHBeiA'
-
-        let endpoint = `https://www.googleapis.com/youtube/v3/search?key=${ApiKey}&q=${terms}&part=snippet,id&order=date&maxResults=10`
-
-        // https://www.googleapis.com/youtube/v3/search?key=AIzaSyAUd28jjI7Xv_jB4wypxv-BiUPd6GHBeiA&q="dogs and cats"&part=snippet,id&order=date&maxResults=10
-        
-        fetch(endpoint)
-            .then((response) => {
-                return response.json()
-            })
-            .then((videos) => {
-                this.setState({ videoItems: videos.items })
-            })
-    }
-
-    setVideoSelected(videoId){
-        this.setState({videoSelected: videoId});
-        this.setState({playerState:true})
-
-        this.child.onYouTubeReady(videoId);
-    }
     
+
+    playerLoad(songInfo){
+
+        let song = songInfo
+        let songId = song.id.videoId;
+        this.player.onYouTubeReady(songId);
+        this.setState(
+            { 
+                PlayingSong: true,
+                songTitle: song.snippet.title,
+                songImg: song.snippet.thumbnails.high.url
+            }
+        )
+
+    }
+
+    playerPlay(){
+        this.player.playerPlay();
+        this.setState({PlayingSong: true})
+    }
+
+    playerPause(){
+        this.player.playerPause();
+        // this.setState({PlayingSong: false})
+    }
+
     render() {
         return (
             <div>
-                <header>
-                    <Search onSearch ={ this.handleApiQuery.bind(this)}/>
-                </header>
-                <section id="results">
-                    <SearchList results = {this.state.videoItems} onClickedVideo={this.setVideoSelected.bind(this)}/>
+                <Home 
+                    songInfo={this.playerLoad.bind(this)}
+                />
+                <ReactCSSTransitionGroup
+                    transitionName="mp"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}>
                     
-                    <AudioPlayer videoId = {this.state.videoSelected} playerState={this.state.playerState} onRef={ref => (this.child = ref)}/>
-                </section>
+                    {this.state.PlayingSong
+                        ? <MiniPlayer 
+                            title={this.state.songTitle} 
+                            image={ this.state.songImg} 
+                            playerState={this.state.PlayingSong}
+                            onClickPause={this.playerPause.bind(this)}
+                            onClickPlay={this.playerPlay.bind(this)}
+                            /> 
+                        : '' }  
+                </ReactCSSTransitionGroup>                     
+                <AudioPlayer onRef={ref => (this.player = ref)} />
             </div>
         );
     }
