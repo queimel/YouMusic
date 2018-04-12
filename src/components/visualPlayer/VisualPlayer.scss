@@ -1,0 +1,136 @@
+#visualPlayer{
+    padding: 8%;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+
+
+    background: black;
+
+    header{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content:  space-between;
+    
+        h1{
+            font-size: 1em;
+            color: white;
+            font-weight: 300;
+    
+            span{
+                color: orangered;
+            }
+        }
+    
+        button{
+            color: white;
+        }
+    }
+
+    .song-info{
+
+        width: 100%;
+        text-align: center;
+        margin: 2em 0;
+    
+        h2{
+            font-size: 2em;
+            font-weight: 300;
+            color: white;
+            margin: 0 0 0.5em 0;
+        }
+    
+        p{
+            font-size: 1em;
+            font-weight: 300;
+            color: orangered;
+        }
+    }
+
+    #player{
+
+   
+
+        .img{
+            width: 100%;
+    
+            img{
+                width: 100%;
+            }
+        }
+    }
+    
+    #song{
+        padding: 10%;
+    }
+    
+    .time-line{
+        width: 100%;
+        height: 5px;
+    
+        .progress{
+            width: 60%;
+            background: orangered;
+            height: 100%;
+            display:block;
+        }
+    }
+
+    .controls{
+
+        width: 100%;
+    
+        ul{
+            display: flex;
+            flex-direction: row;
+    
+            justify-content:  space-between;
+    
+            li{
+                align-self: center;
+            }
+    
+        }
+    
+        button{
+    
+            color: lightgray;
+    
+             i{
+                font-size: 1em;
+                
+             }       
+        }
+    }
+
+}
+
+.vp-enter {
+    opacity: 0;
+    -webkit-transform: translateX(103%);
+    transform: translateX(103%);
+    transition: transform 300ms linear, opacity 0.3s cubic-bezier(0,0,0.3,1);
+    will-change: transform, opacity;
+  }
+.vp-enter.vp-enter-active {
+    opacity: 1;
+	-webkit-transform: none;
+			transform: none;
+	transition: transform 300ms linear;
+}
+.vp-leave {
+	-webkit-transform: none;
+			transform: none;
+    transition: transform 300ms linear;
+    will-change: transform;
+}
+.vp-leave.vp-leave-active {
+    -webkit-transform: translateX(103%);
+    transform: translateX(103%);
+    transition: transform 300ms linear;
+}

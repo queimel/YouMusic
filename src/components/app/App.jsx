@@ -3,6 +3,8 @@ import Home from '../Home/Home';
 import AudioPlayer from '../audioplayer/AudioPlayer'
 import MiniPlayer from '../MiniPlayer/MiniPlayer'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import VisualPlayer from '../visualPlayer/VisualPlayer'
+
 
 class App extends Component {
 
@@ -68,9 +70,18 @@ class App extends Component {
         // this.setState({PlayingSong: false})
     }
 
+    showVisualPlayer(){
+        this.setState({ VisualPlayerOn: true})
+        console.log(this.state.VisualPlayerOn)
+    }
+
+    hideVisualPlayer(){
+        this.setState({ VisualPlayerOn: false})
+    }
+
     render() {
         return (
-            <div>
+            <div id="app">
                 <Home 
                     songInfo={this.playerLoad.bind(this)}
                     searchResults={this.state.son}
@@ -85,12 +96,27 @@ class App extends Component {
                             title={this.state.songPlayedInfo.songTitle} 
                             image={ this.state.songPlayedInfo.songImg} 
                             playerState={this.state.PlayingSong}
-                            onClickPause={this.playerPause.bind(this)}
-                            onClickPlay={this.playerPlay.bind(this)}
+                            onClickMp={this.showVisualPlayer.bind(this)}
                             /> 
                         : '' }  
                 </ReactCSSTransitionGroup>                     
-                <AudioPlayer onRef={ref => (this.player = ref)} />
+                <AudioPlayer onRef={ref => (this.player = ref)}  />
+
+                <ReactCSSTransitionGroup
+                    transitionName="vp"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={300}>
+
+                    {
+                        this.state.VisualPlayerOn
+                        ? <VisualPlayer 
+                            title={this.state.songTitle} 
+                            image={ this.state.songImg} 
+                            playerState={this.state.PlayingSong}                        
+                        />
+                        : null
+                    }
+                </ReactCSSTransitionGroup>
             </div>
         );
     }
