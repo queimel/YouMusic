@@ -8,22 +8,11 @@ import './MiniPlayer.scss'
 class MiniPlayer extends Component {
     constructor(props) {
         super(props);
-        
-        this.state = {
-            paused: false
-        }
     }
     
-    handlePauseClick(e){
+    handleClick(e){
         e.stopPropagation();
-        this.props.onClickPause();
-        this.setState({paused: true})
-    }
-
-    handlePlayClick(e){
-        e.stopPropagation();
-        this.props.onClickPlay();
-        this.setState({paused: false})
+        this.props.onClickMp();
     }
 
     render() {
@@ -39,16 +28,9 @@ class MiniPlayer extends Component {
                     </div>      
                 </div>
                 <div className="actions">
-                
-                        {this.state.paused === false
-                            ? <button onClickCapture={this.handlePauseClick.bind(this)}> <i className="fas fa-pause-circle fa-2x"></i> </button>
-                            : null
-                        }
-                        {this.state.paused === true
-                            ? <button onClickCapture={this.handlePlayClick.bind(this)}><i className="fas fa-play-circle fa-2x"></i></button>
-                            : null
-                        }                        
-                      
+                    <button onClickCapture={this.handleClick.bind(this)}>
+                        <i className="fas fa-play-circle fa-2x"></i>
+                    </button>
                 </div>
             </div>
         );

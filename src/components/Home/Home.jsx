@@ -43,7 +43,7 @@ class Home extends Component {
     
     render() {
         return (
-            <div>
+            <div id="home">
                 <header>
                     <Search onSearch ={ this.handleApiQuery.bind(this)}/>
                 </header>
