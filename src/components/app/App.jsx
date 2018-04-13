@@ -13,27 +13,50 @@ class App extends Component {
 
         this.state = {
             PlayingSong: false,
-            songTitle: '',
-            songImg: '',
-            VisualPlayerOn: ''
+            songPlayedInfo: [],
+            VisualPlayerOn: false
         }
     }
 
-    
 
     playerLoad(songInfo){
 
+        // Recibe ID de cancion de YT, con toda la info
         let song = songInfo
-        let songId = song.id.videoId;
-        this.player.onYouTubeReady(songId);
+
+        // le pasa la id de la cancion al YT player
+        this.player.onYouTubeReady(song.songId);
+
+        // Setea los estados
         this.setState(
             { 
                 PlayingSong: true,
-                songTitle: song.snippet.title,
-                songImg: song.snippet.thumbnails.high.url
+                songPlayedInfo: song, 
+                VisualPlayerOn: false
             }
         )
 
+        console.log(this.state.songPlayedInfo)
+
+        // Almacena la cancion en localStorage para guardarlo en las busquedas recientes
+        let songStorage = song
+
+        let busquedas = [];
+        let lastSearches = this.getLocalStorage();
+
+        if(lastSearches === null || lastSearches.length === 0){
+            localStorage.setItem('latestSearches', JSON.stringify({}));
+        }else{
+            busquedas = JSON.parse(localStorage.getItem("latestSearches"));
+        }
+
+        busquedas.push(songStorage);
+        localStorage.setItem('latestSearches', JSON.stringify(busquedas));
+
+    }
+
+    getLocalStorage(){
+        return JSON.parse(localStorage.getItem("latestSearches"));
     }
 
     playerPlay(){
@@ -60,6 +83,7 @@ class App extends Component {
             <div id="app">
                 <Home 
                     songInfo={this.playerLoad.bind(this)}
+                    searchResults={this.state.son}
                 />
                 <ReactCSSTransitionGroup
                     transitionName="mp"
@@ -68,8 +92,8 @@ class App extends Component {
                     
                     {this.state.PlayingSong
                         ? <MiniPlayer 
-                            title={this.state.songTitle} 
-                            image={ this.state.songImg} 
+                            title={this.state.songPlayedInfo.songTitle} 
+                            image={ this.state.songPlayedInfo.songImg} 
                             playerState={this.state.PlayingSong}
                             onClickMp={this.showVisualPlayer.bind(this)}
                             /> 
