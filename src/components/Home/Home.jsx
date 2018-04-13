@@ -14,6 +14,17 @@ class Home extends Component {
     }
     componentDidMount(){
         this.setState({playerState: this.props.showMiniPlayer})
+
+        if(this.state.songItems === null){
+            this.setState({list: this.lastSearches() })
+        }
+
+        console.log(this.state.songItems)
+
+    }
+
+    lastSearches(){
+        return JSON.parse(localStorage.getItem("latestSearches"));
     }
 
     handleApiQuery(e) {
@@ -43,6 +54,7 @@ class Home extends Component {
     setVideoSelected(videoId){
      
         let song = this.state.songItems[videoId]
+        console.log(song)
         this.props.songInfo(song)
         
     }

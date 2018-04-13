@@ -25,27 +25,21 @@ class App extends Component {
 
     playerLoad(songInfo){
 
-        // Recibe ID de cancion de YT
-        let song = songInfo
-        // Almacena info necesaria de cancion
-        let songId = song.id.videoId;
-        let songTitle = song.snippet.title
-        let songImg = song.snippet.thumbnails.high.url
+        console
 
-        let songToPlay = { 
-            "songId": songId,
-            "songTitle": songTitle,
-            "songImg": songImg
-        }
+        // Recibe ID de cancion de YT, con toda la info
+        let song = songInfo
+
 
         // le pasa la id de la cancion al YT player
-        this.player.onYouTubeReady(songToPlay.songId);
+        this.player.onYouTubeReady(song.songId);
 
         // Setea los estados
         this.setState(
             { 
                 PlayingSong: true,
-                songPlayedInfo: songToPlay
+                songPlayedInfo: song, 
+                VisualPlayerOn: false
             }
         )
 
