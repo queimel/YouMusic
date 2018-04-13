@@ -13,6 +13,7 @@ class AudioPlayer extends Component {
 
         this.state = {
             player: {},
+            tiempoTranscurrido: 0
         }
     }
     
@@ -20,8 +21,11 @@ class AudioPlayer extends Component {
         this.props.onRef(this)
         const idPlayer = '#'+this.playerRef.current.id;
         const player = new YTPlayer(idPlayer);
-        this.setState({player})
+        this.setState({player}) 
+        
     }
+
+
 
     componentWillUnmount() {
         this.props.onRef(undefined)
@@ -35,6 +39,37 @@ class AudioPlayer extends Component {
         this.playerPlay();
     }
 
+    timeUpdate(){
+        
+        let player = this.state.player;
+        let duracion = 0
+        let play = false
+
+        player.on('playing', () => {
+            duracion = player.getDuration()
+            play = true
+        })
+
+       
+        player.on('timeupdate', (seconds) => {
+            if(play){
+                let tiempoTranscurrido = (seconds*100) / duracion
+                tiempoTranscurrido = Math.floor(tiempoTranscurrido)
+                if(tiempoTranscurrido === Infinity){
+                    tiempoTranscurrido = 0
+                }
+                this.setState({ tiempoTranscurrido: tiempoTranscurrido })
+
+                this.timeTrigger()
+            }
+        })
+        
+    }
+
+    timeTrigger(){
+        this.props.getTimePlayed(this.state.tiempoTranscurrido);
+    }
+
     playerPlay(){
         let player = this.state.player;
         player.play();        
@@ -45,6 +80,7 @@ class AudioPlayer extends Component {
     }
 
     render() {
+
         return (
             <div id="player" ref={this.playerRef}></div>
         );

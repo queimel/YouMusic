@@ -6,6 +6,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import VisualPlayer from '../visualPlayer/VisualPlayer'
 
 
+
 class App extends Component {
 
     constructor(props) {
@@ -14,7 +15,8 @@ class App extends Component {
         this.state = {
             PlayingSong: false,
             songPlayedInfo: [],
-            VisualPlayerOn: false
+            VisualPlayerOn: false,
+            timePlayed: 0
         }
     }
 
@@ -36,9 +38,16 @@ class App extends Component {
             }
         )
 
-        console.log(this.state.songPlayedInfo)
-
         // Almacena la cancion en localStorage para guardarlo en las busquedas recientes
+        this.setLocalStorage(song)
+
+        // el player emite cantidad de segundos
+        let timePlayed = this.player.timeUpdate();
+        // console.log(timePlayed);
+
+    }
+
+    setLocalStorage(song){
         let songStorage = song
 
         let busquedas = [];
@@ -52,7 +61,6 @@ class App extends Component {
 
         busquedas.push(songStorage);
         localStorage.setItem('latestSearches', JSON.stringify(busquedas));
-
     }
 
     getLocalStorage(){
@@ -77,6 +85,12 @@ class App extends Component {
         this.setState({ VisualPlayerOn: false})
     }
 
+    timeTrigger(time){
+        
+        this.setState({timePlayed: time})
+    }
+
+
     render() {
         return (
             <div id="app">
@@ -97,8 +111,9 @@ class App extends Component {
                             onClickMp={this.showVisualPlayer.bind(this)}
                             /> 
                         : '' }  
-                </ReactCSSTransitionGroup>                     
-                <AudioPlayer onRef={ref => (this.player = ref)}  />
+                </ReactCSSTransitionGroup>            
+
+                <AudioPlayer onRef={ref => (this.player = ref)} getTimePlayed={this.timeTrigger.bind(this)}/>
 
                 <ReactCSSTransitionGroup
                     transitionName="vp"
@@ -113,7 +128,8 @@ class App extends Component {
                             playerState={this.state.PlayingSong} 
                             onClickBackVp={this.hideVisualPlayer.bind(this)} 
                             onClickPlay={this.playerPlay.bind(this)}
-                            onClickPause={this.playerPause.bind(this)}                     
+                            onClickPause={this.playerPause.bind(this)}
+                            timeLineCount= {this.state.timePlayed}                
                         />
                         : null
                     }
