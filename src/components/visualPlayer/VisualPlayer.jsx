@@ -3,6 +3,9 @@ import '../../scss/variables.scss'
 import './VisualPlayer.scss'
 import FontAwesome, { FontawesomeObject } from '@fortawesome/fontawesome';
 import { faHeadphones, faPlay, faPlayCircle, faPause } from '@fortawesome/fontawesome-free-solid';
+import { Line } from 'rc-progress';
+
+
 class VisualPlayer extends Component {
 
     constructor(props) {
@@ -25,8 +28,6 @@ class VisualPlayer extends Component {
             this.setState({play: true})
             this.props.onClickPlay()
         }
-
-        console.log(this.state.play)
     }
 
     render() {
@@ -45,9 +46,6 @@ class VisualPlayer extends Component {
                     <div id="song">
                         <div className="img">
                             <img src={this.props.image} alt="" />
-                            <div className="time-line">
-                                <span className="progress"></span>
-                            </div>
                         </div>
 
 
@@ -56,6 +54,7 @@ class VisualPlayer extends Component {
                         </div>
                     </div>
                 </section>
+                <Line percent={this.props.timeLineCount} strokeWidth="4" strokeColor="#D3D3D3" />
                 <div className="controls">
                     <ul>
                         <li>
