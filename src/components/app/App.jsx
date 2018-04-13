@@ -13,23 +13,16 @@ class App extends Component {
 
         this.state = {
             PlayingSong: false,
-            songPlayedInfo: {}
+            songPlayedInfo: [],
+            VisualPlayerOn: false
         }
     }
 
-    componentWillMount(){
-        if(localStorage.getItem("latestSearches") === null){
-            localStorage.setItem("latestSearches", JSON.stringify([]));
-        }
-    }
 
     playerLoad(songInfo){
 
-        console
-
         // Recibe ID de cancion de YT, con toda la info
         let song = songInfo
-
 
         // le pasa la id de la cancion al YT player
         this.player.onYouTubeReady(song.songId);
@@ -43,15 +36,27 @@ class App extends Component {
             }
         )
 
+        console.log(this.state.songPlayedInfo)
+
         // Almacena la cancion en localStorage para guardarlo en las busquedas recientes
-        let songStorage = this.state.songPlayedInfo
+        let songStorage = song
 
         let busquedas = [];
-        busquedas = JSON.parse(localStorage.getItem("latestSearches"));
+        let lastSearches = this.getLocalStorage();
+
+        if(lastSearches === null || lastSearches.length === 0){
+            localStorage.setItem('latestSearches', JSON.stringify({}));
+        }else{
+            busquedas = JSON.parse(localStorage.getItem("latestSearches"));
+        }
 
         busquedas.push(songStorage);
         localStorage.setItem('latestSearches', JSON.stringify(busquedas));
 
+    }
+
+    getLocalStorage(){
+        return JSON.parse(localStorage.getItem("latestSearches"));
     }
 
     playerPlay(){

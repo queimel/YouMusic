@@ -14,22 +14,6 @@ class SearchList extends Component {
     }
 
 
-
-
-    componentWillReceiveProps(){
-
-        if(this.props.results.length === 0){
-            this.setState({list: this.lastSearches() })
-         }else{
-             this.setState({list: this.props.results})
-         }
-    }
-
-
-    lastSearches(){
-        return JSON.parse(localStorage.getItem("latestSearches"));
-    }
-        
     handleItemClick(e){
         e.stopPropagation();
         let videoId = e.currentTarget.getAttribute('data-id');
@@ -38,7 +22,7 @@ class SearchList extends Component {
 
     render() {
 
-        let items = this.state.list;
+        let items = this.props.results;
 
         return <div>
             <ul>

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Search from '../search/search'
 import SearchList from '../searchList/SearchList'
-
+import './Home.scss'
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            songItems : []
+            songItems : [],
+            isLastSearch: false
         }
 
 
@@ -15,13 +16,14 @@ class Home extends Component {
     componentDidMount(){
         this.setState({playerState: this.props.showMiniPlayer})
 
-        if(this.state.songItems === null){
-            this.setState({list: this.lastSearches() })
-        }
-
-        console.log(this.state.songItems)
-
+        if(this.state.songItems.length === 0){
+            this.setState({
+                songItems: this.lastSearches(),
+                isLastSearch: true
+            })
+         }
     }
+
 
     lastSearches(){
         return JSON.parse(localStorage.getItem("latestSearches"));
@@ -47,14 +49,16 @@ class Home extends Component {
                     }
                 })
 
-                this.setState({ songItems: videosArray })
+                this.setState({ 
+                    songItems: videosArray,
+                    isLastSearch: false
+                })
             })
     }
 
     setVideoSelected(videoId){
      
         let song = this.state.songItems[videoId]
-        console.log(song)
         this.props.songInfo(song)
         
     }
@@ -67,6 +71,7 @@ class Home extends Component {
                     <Search onSearch ={ this.handleApiQuery.bind(this)}/>
                 </header>
                 <section id="results">
+                    {this.state.isLastSearch ? <h3>Tus ultimas busquedas</h3> : null}
                     <SearchList 
                     results = {this.state.songItems} 
                     onClickedVideo={this.setVideoSelected.bind(this)}
