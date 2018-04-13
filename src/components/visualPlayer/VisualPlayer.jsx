@@ -8,20 +8,25 @@ class VisualPlayer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            paused: false
+            play: false
         }        
     }
-    
-    handlePauseClick(e){
+    handleClickBack(e){
         e.stopPropagation();
-        this.props.onClickPause();
-        this.setState({paused: true})
+        this.props.onClickBackVp();
     }
 
-    handlePlayClick(e){
-        e.stopPropagation();
-        this.props.onClickPlay();
-        this.setState({paused: false})
+    play(){
+
+        if(this.state.play === true){
+            this.setState({play: false})
+            this.props.onClickPause()
+        }else{
+            this.setState({play: true})
+            this.props.onClickPlay()
+        }
+
+        console.log(this.state.play)
     }
 
     render() {
@@ -32,8 +37,8 @@ class VisualPlayer extends Component {
                         <span><i className="fas fa-headphones"></i></span>
                         Ahora escuchas</h1>
 
-                    <button>
-                        <i className="fas fa-ellipsis-v fa-lg"></i>
+                    <button onClickCapture={this.handleClickBack.bind(this)}>
+                        <i className="fas fa-arrow-circle-left fa-lg"></i>
                     </button>
                 </header>
                 <section id="player">
@@ -48,47 +53,37 @@ class VisualPlayer extends Component {
 
                         <div className="song-info">
                             <h2 className="title">{this.props.title}</h2>
-                            {/*<p className="artist">Yolito y su combo</p>}*/}
                         </div>
                     </div>
-
-                    <div className="controls">
-
-                        <ul>
-                            <li>
-                                <button>
-                                    <i className="fas fa-random "></i>
-                                </button>
-                            </li>
-                            <li>
-                                <button>
-                                    <i className="fas fa-backward fa-lg"></i>
-                                </button>
-                            </li>
-                            <li>
-                                {this.state.paused === false
-                                    ?  <i className="fas fa-pause-circle fa-2x"></i> 
-                                    : null
-                                }
-                                {this.state.paused === true
-                                    ? <button onClickCapture={this.handlePlayClick.bind(this)}><i className="fas fa-play-circle fa-2x"></i></button>
-                                    : null
-                                } 
-                            </li>
-                            <li>
-                                <button>
-                                    <i className="fas fa-forward fa-lg"></i>
-                                </button>
-                            </li>
-                            <li>
-                                <button>
-                                    <i className="fas fa-redo "></i>
-                                </button>
-                            </li>
-                        </ul>
-
-                    </div>
                 </section>
+                <div className="controls">
+                    <ul>
+                        <li>
+                            <button>
+                                <i className="fas fa-random "></i>
+                            </button>
+                        </li>
+                        <li>
+                            <button>
+                                <i className="fas fa-backward fa-lg"></i>
+                            </button>
+                        </li>
+                        <li>
+                            <button onClick={this.play.bind(this)} className={!this.state.play === true ? 'btn-play-pause pause' : 'btn-play-pause play'}></button>
+                        </li>
+                        <li>
+                            <button>
+                                <i className="fas fa-forward fa-lg"></i>
+                            </button>
+                        </li>
+                        <li>
+                            <button>
+                                <i className="fas fa-redo "></i>
+                            </button>
+                        </li>
+                    </ul>
+
+                </div>
             </div>
         );
     }

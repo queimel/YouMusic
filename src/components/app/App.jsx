@@ -71,7 +71,6 @@ class App extends Component {
 
     showVisualPlayer(){
         this.setState({ VisualPlayerOn: true})
-        console.log(this.state.VisualPlayerOn)
     }
 
     hideVisualPlayer(){
@@ -109,9 +108,12 @@ class App extends Component {
                     {
                         this.state.VisualPlayerOn
                         ? <VisualPlayer 
-                            title={this.state.songTitle} 
-                            image={ this.state.songImg} 
-                            playerState={this.state.PlayingSong}                        
+                            title={this.state.songPlayedInfo.songTitle} 
+                            image={ this.state.songPlayedInfo.songImg} 
+                            playerState={this.state.PlayingSong} 
+                            onClickBackVp={this.hideVisualPlayer.bind(this)} 
+                            onClickPlay={this.playerPlay.bind(this)}
+                            onClickPause={this.playerPause.bind(this)}                     
                         />
                         : null
                     }
