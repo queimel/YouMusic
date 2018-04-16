@@ -96,7 +96,6 @@ class App extends Component {
             <div id="app">
                 <Home 
                     songInfo={this.playerLoad.bind(this)}
-                    searchResults={this.state.son}
                 />
                 <ReactCSSTransitionGroup
                     transitionName="mp"
