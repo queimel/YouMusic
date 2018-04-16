@@ -16,11 +16,13 @@ class Home extends Component {
     componentDidMount(){
         this.setState({playerState: this.props.showMiniPlayer})
 
-        if(this.state.songItems.length === 0){
+        if(this.state.songItems.length === 0 && this.lastSearches()){
             this.setState({
                 songItems: this.lastSearches(),
                 isLastSearch: true
             })
+         }else{
+             console.log('no existen items en ninguna parte!')
          }
     }
 
