@@ -1,0 +1,258 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+ShallowWrapper {
+  "length": 1,
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Search />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <form
+        action=""
+      >
+        <article
+          className="input"
+        >
+          <input
+            name="search"
+            onKeyUp={undefined}
+            placeholder="buscar"
+            type="input"
+          />
+        </article>
+        <button
+          type="submit"
+        >
+          <i
+            className="fas fa-sync-alt"
+          />
+        </button>
+      </form>,
+      "id": "search",
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "action": "",
+        "children": Array [
+          <article
+            className="input"
+          >
+            <input
+              name="search"
+              onKeyUp={undefined}
+              placeholder="buscar"
+              type="input"
+            />
+          </article>,
+          <button
+            type="submit"
+          >
+            <i
+              className="fas fa-sync-alt"
+            />
+          </button>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <input
+              name="search"
+              onKeyUp={undefined}
+              placeholder="buscar"
+              type="input"
+            />,
+            "className": "input",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "name": "search",
+              "onKeyUp": undefined,
+              "placeholder": "buscar",
+              "type": "input",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "input",
+          },
+          "type": "article",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": <i
+              className="fas fa-sync-alt"
+            />,
+            "type": "submit",
+          },
+          "ref": null,
+          "rendered": Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "className": "fas fa-sync-alt",
+            },
+            "ref": null,
+            "rendered": null,
+            "type": "i",
+          },
+          "type": "button",
+        },
+      ],
+      "type": "form",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <form
+          action=""
+        >
+          <article
+            className="input"
+          >
+            <input
+              name="search"
+              onKeyUp={undefined}
+              placeholder="buscar"
+              type="input"
+            />
+          </article>
+          <button
+            type="submit"
+          >
+            <i
+              className="fas fa-sync-alt"
+            />
+          </button>
+        </form>,
+        "id": "search",
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "action": "",
+          "children": Array [
+            <article
+              className="input"
+            >
+              <input
+                name="search"
+                onKeyUp={undefined}
+                placeholder="buscar"
+                type="input"
+              />
+            </article>,
+            <button
+              type="submit"
+            >
+              <i
+                className="fas fa-sync-alt"
+              />
+            </button>,
+          ],
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <input
+                name="search"
+                onKeyUp={undefined}
+                placeholder="buscar"
+                type="input"
+              />,
+              "className": "input",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "name": "search",
+                "onKeyUp": undefined,
+                "placeholder": "buscar",
+                "type": "input",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "input",
+            },
+            "type": "article",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": <i
+                className="fas fa-sync-alt"
+              />,
+              "type": "submit",
+            },
+            "ref": null,
+            "rendered": Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "className": "fas fa-sync-alt",
+              },
+              "ref": null,
+              "rendered": null,
+              "type": "i",
+            },
+            "type": "button",
+          },
+        ],
+        "type": "form",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+      },
+    },
+    "disableLifecycleMethods": true,
+  },
+}
+`;
