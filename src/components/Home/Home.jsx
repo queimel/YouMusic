@@ -10,25 +10,24 @@ class Home extends Component {
             songItems : [],
             isLastSearch: false
         }
-
-
     }
+    
     componentDidMount(){
-        this.setState({playerState: this.props.showMiniPlayer})
-
-        if(this.state.songItems.length === 0 && this.lastSearches()){
-            this.setState({
-                songItems: this.lastSearches(),
-                isLastSearch: true
-            })
-         }else{
-             console.log('no existen items en ninguna parte!')
-         }
+        this.setState({playerState: this.props.showMiniPlayer});
+        this.checkSongList();
+    }
+    /* comprueba el estado 'isLastSearch' para determinar sidebe llenar el array songItems
+    con las ultimas busquedas o dejarlo vacio */
+    checkSongList(){
+        let lastSearchesBox = this.lastSearchedItems();
+        this.setState({
+            songItems: lastSearchesBox,
+            isLastSearch: !!lastSearchesBox.length
+        });
     }
 
-
-    lastSearches(){
-        return JSON.parse(localStorage.getItem("latestSearches"));
+    lastSearchedItems(){
+        return JSON.parse(localStorage.getItem("latestSearches")) || [];
     }
 
     handleApiQuery(e) {
