@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Search from '../search/search'
 import SearchList from '../searchList/SearchList'
 import './Home.scss'
+import fetch from 'node-fetch';
 
 class Home extends Component {
     constructor(props) {
@@ -26,22 +27,14 @@ class Home extends Component {
         });
     }
 
-    lastSearchedItems(){
-        return JSON.parse(localStorage.getItem("latestSearches")) || [];
-    }
 
     handleApiQuery(e) {
         let terms = e.target.value;
-        const ApiKey = 'AIzaSyAUd28jjI7Xv_jB4wypxv-BiUPd6GHBeiA'
 
-        let endpoint = `https://www.googleapis.com/youtube/v3/search?key=${ApiKey}&q=${terms}&part=snippet,id&order=viewCount&maxResults=10&type=video`
-        
-        fetch(endpoint)
-            .then((response) => {
-                return response.json()
-            })
-            .then((videos) => {
+        this.getVideos(terms).then((videos) => {
+            
                 const { items } = videos
+
                 let videosArray =  items.map(function(item){
                     return {
                         "songId": item.id.videoId,
@@ -56,6 +49,19 @@ class Home extends Component {
                 })
             })
     }
+
+
+    lastSearchedItems(){
+        return JSON.parse(localStorage.getItem("latestSearches")) || [];
+    }
+    getVideos(terms) {
+        const ApiKey = 'AIzaSyAUd28jjI7Xv_jB4wypxv-BiUPd6GHBeiA'
+        let endpoint = `https://www.googleapis.com/youtube/v3/search?key=${ApiKey}&q=${terms}&part=snippet,id&order=viewCount&maxResults=10&type=video`
+        return fetch(endpoint)
+            .then((response) => {
+                return response.json()
+            })
+    } 
 
     setVideoSelected(videoId){
      
