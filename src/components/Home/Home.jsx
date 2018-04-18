@@ -42,7 +42,6 @@ class Home extends Component {
                         "songImg": item.snippet.thumbnails.medium.url                        
                     }
                 })
-
                 this.setState({ 
                     songItems: videosArray,
                     isLastSearch: false

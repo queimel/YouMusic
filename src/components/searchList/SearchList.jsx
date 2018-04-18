@@ -25,7 +25,7 @@ class SearchList extends Component {
         let items = this.props.results;
 
         return <div>
-            <ul>
+            <ul id="searchList">
               {items.map((item, index) => (
                 <li
                   key={index}

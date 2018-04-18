@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "test": "jest --watch"
+    "test": "jest --watch --verbose"
   },
   "repository": {
     "type": "git",
@@ -46,6 +46,7 @@
     "enzyme-adapter-react-16": "^1.1.1",
     "jest": "^22.4.3",
     "jest-cli": "^22.4.3",
+    "jest-fetch-mock": "^1.5.0",
     "node-sass": "^4.8.3",
     "react-test-renderer": "^16.2.0",
     "sass-loader": "^6.0.7",
@@ -55,6 +56,7 @@
     "webpack-dev-server": "^3.1.1"
   },
   "jest": {
+    "automock": false,
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
