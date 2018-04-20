@@ -20,7 +20,8 @@ class App extends Component {
         }
     }
 
-
+    // recibe la informacion completa del video y se la envia al player para ser reproducida
+    // tambien la almacena en localStorage
     playerLoad(songInfo){
 
         // Recibe ID de cancion de YT, con toda la info
@@ -37,7 +38,6 @@ class App extends Component {
                 VisualPlayerOn: false
             }
         )
-
         // Almacena la cancion en localStorage para guardarlo en las busquedas recientes
         this.setLocalStorage(song)
 
@@ -47,6 +47,8 @@ class App extends Component {
 
     }
 
+    // recibe una cancion, y comprueba si lastSearches existe en localStorage
+    // en casod e no existir, crea la key, en caso contrario, hace un push para almacenar la cancion en la key ya existente
     setLocalStorage(song){
         let songStorage = song
 
@@ -63,30 +65,34 @@ class App extends Component {
         localStorage.setItem('latestSearches', JSON.stringify(busquedas));
     }
 
+    // obtiene todas las canciones almacenadas en localStorage
     getLocalStorage(){
         return JSON.parse(localStorage.getItem("latestSearches"));
     }
 
+    // ejecuta plaayerPlay dentro de la instancia de player
+    // y setea el estado PlayingSong a true
     playerPlay(){
         this.player.playerPlay();
         this.setState({PlayingSong: true})
     }
-
+    // pausa intancia de player
     playerPause(){
         this.player.playerPause();
-        // this.setState({PlayingSong: false})
     }
 
+    // muestra visualPlayer
     showVisualPlayer(){
         this.setState({ VisualPlayerOn: true})
     }
 
+    // ocualta visualPlayer
     hideVisualPlayer(){
         this.setState({ VisualPlayerOn: false})
     }
 
+    
     timeTrigger(time){
-        
         this.setState({timePlayed: time})
     }
 

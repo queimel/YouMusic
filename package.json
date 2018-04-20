@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "test": "jest --watch --verbose"
+    "test": "jest --watch --verbose --coverage"
   },
   "repository": {
     "type": "git",
@@ -47,6 +47,7 @@
     "jest": "^22.4.3",
     "jest-cli": "^22.4.3",
     "jest-fetch-mock": "^1.5.0",
+    "jest-localstorage-mock": "^2.2.0",
     "node-sass": "^4.8.3",
     "react-test-renderer": "^16.2.0",
     "sass-loader": "^6.0.7",
@@ -62,7 +63,8 @@
       "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
     },
     "setupFiles": [
-      "./src/setupTests.js"
+      "./src/setupTests.js",
+      "jest-localstorage-mock"
     ]
   }
 }
